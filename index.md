@@ -2,8 +2,8 @@
 site: sandpaper::sandpaper_site
 ---
 
-This is a new lesson built with [The Carpentries Workbench][workbench]. 
+## Learning Objectives
 
-
-[workbench]: https://carpentries.github.io/sandpaper-docs
+After attending this training, participants will be able to:
+- 
 
