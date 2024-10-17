@@ -1,11 +1,5 @@
-# This template CITATION.cff file was generated with cffinit.
-# Visit https://bit.ly/cffinit to replace its contents
-# with information about your lesson.
-# Remember to update this file periodically, 
-# ensuring that the author list and other fields remain accurate.
-
 cff-version: 1.2.0
-title: FIXME
+title: APIs with Python
 message: >-
   Please cite this lesson using the information in this file
   when you refer to it in publications, and/or if you
@@ -13,10 +7,16 @@ message: >-
   training material.
 type: dataset
 authors:
-  - given-names: FIXME
-    family-names: FIXME
+  - given-names: Cody
+    family-names: Hennesy
+    orcid: 0000-0002-9410-9810
 abstract: >-
-  FIXME Replace this with a short abstract describing the
-  lesson, e.g. its target audience and main intended
-  learning objectives.
+  This lesson is an introduction to using Python to work with web APIs. It is intended for library and information workers who have had some introductory experience with Python. The lesson focuses on the OpenAlex API, using real-world examples related to downloading and parsing different kinds of citation records. The lesson uses the JupyterLab computing environment and Python 3.
+keywords:
+  - Python
+  - Library Carpentry
+  - Jupyter 
+  - APIs
+  - OpenAlex
+  - Libraries
 license: CC-BY-4.0
