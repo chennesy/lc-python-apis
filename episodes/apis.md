@@ -4,18 +4,18 @@ teaching: 10
 exercises: 2
 ---
 
-:::::::::::::::::::::::::::::::::::::: questions 
-
-- What is an API?
-- What is OpenAlex?
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Explain some common uses for APIs (Application Programming Interfaces).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- What is an API?
+- What is OpenAlex?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## What is an API?
 
@@ -27,41 +27,11 @@ exercises: 2
 
 ### OpenAlex API
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-## Challenge 1: Can you do it?
-
-
-```python
-
-```
-
-:::::::::::::::::::::::: solution 
-
-## Output
- 
-```output
-```
-
-:::::::::::::::::::::::::::::::::
-
-
-
-::::::::::::::::::::::::::::::::::::: callout
-
-Callout 
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- 
+- OpenAlex is an open index of scholarly works, authors, institutions, and more. 
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-[r-markdown]: https://rmarkdown.rstudio.com/
+
