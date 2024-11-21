@@ -67,6 +67,7 @@ contact: 'codyhennesy@gmail.com'
 # Order of episodes in your lesson
 episodes: 
 - apis.md
+- openalex_api.md
 
 # Information for Learners
 learners: 
