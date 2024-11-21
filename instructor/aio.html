@@ -253,6 +253,18 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="openalex_api.html">2. The OpenAlex API</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -310,10 +322,10 @@
         
 <section id="aio-apis"><p>Content from <a href="apis.html">APIs &amp; OpenAlex</a></p>
 <hr>
-<p>Last updated on 2024-11-19 |
+<p>Last updated on 2024-11-21 |
 
         <a href="https://github.com/chennesy/lc-python-apis/edit/main/episodes/apis.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
+<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 17 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -327,6 +339,7 @@
 <ul>
 <li>What is an API?</li>
 <li>What is OpenAlex?</li>
+<li>Why do organisations create APIs?</li>
 </ul>
 </div>
 </div>
@@ -338,25 +351,190 @@
 <ul>
 <li>Explain some common uses for APIs (Application Programming
 Interfaces).</li>
+<li>Conduct a search for a scholarly work using the OpenAlex web
+interface.</li>
+<li>Navigate the documentation for the OpenAlex API.</li>
+<li>Identify a few key elements for making RESTful API calls via
+URLs.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="what-is-an-api">What is an API?<a class="anchor" aria-label="anchor" href="#what-is-an-api"></a>
+<section><h2 class="section-heading" id="what-is-openalex">What is OpenAlex?<a class="anchor" aria-label="anchor" href="#what-is-openalex"></a>
 </h2>
 <hr class="half-width">
+<p>OpenAlex is an open index of over 250 million scholarly works from
+around the world. It is developed by <a href="https://ourresearch.org/" class="external-link">OurResearch</a>, a nonprofit dedicated
+to open research. They also developed the <a href="https://unpaywall.org/" class="external-link">Unpaywall</a> browser extension, for
+example.</p>
+<div id="search-openalex" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="search-openalex" class="callout-inner">
+<h3 class="callout-title">Search OpenAlex</h3>
+<div class="callout-content">
+<p>Use <a href="https://openalex.org/" class="external-link">OpenAlex</a> to retrieve a list
+of all of the scholarly works from 2023 that were published by authors
+affiliated with a specific institution. For example, you could look for
+2023 publications from University of Minnesota authors.</p>
+<p>Tips:</p>
+<ol style="list-style-type: decimal">
+<li>If you start to type the name of an institution in the search box
+you will see options to choose items from the database.</li>
+<li>On the search results screen, you can select the big blue “+” button
+to add or remove filters from your search.</li>
+<li>You can manually construct a search by Institution and Year by
+starting from the <a href="https://openalex.org/works?page=1" class="external-link">Search
+Results page</a> and using the filter button to add each element of your
+query.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>You can find the 2023 works by University of Minnesota authors by
+creating a search where:</p>
+<ol style="list-style-type: decimal">
+<li>institution “is” <em>University of Minnesota</em> and</li>
+<li>year “is” <em>2023</em>.</li>
+</ol>
+<figure><img src="../fig/umn_2023.png" alt="Screenshot of the filters used to retrieve 2023 University of Minnesota publications." class="figure mx-auto d-block"></figure>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="what-is-an-api">What is an API?<a class="anchor" aria-label="anchor" href="#what-is-an-api"></a>
+</h2>
+<hr class="half-width">
+<p>Any user of the OpenAlex web interface can search for scholarly works
+and display their results in the web browser. OpenAlex also has an <a href="https://glosario.carpentries.org/en/#api" class="external-link">API, or Application
+Programming Interface</a>, which allows for computer programs–rather
+than a website user–to access contents of the database and download the
+content in different structured formats. The OpenAlex API provides a way
+for computer scripts to interact with the OpenAlex servers, and
+ultimately to access more information than a user of the website could
+manually access.</p>
+<p>Many different websites and publishers provide APIs to their
+content.</p>
 <ul>
-<li>URLs</li>
-<li>HTTP requests: GET, HEAD, POST, etc.</li>
-<li>API examples</li>
-</ul></section><section><h2 class="section-heading" id="what-is-openalex">What is OpenAlex?<a class="anchor" aria-label="anchor" href="#what-is-openalex"></a>
+<li>Newspapers such as the <a href="https://developer.nytimes.com/apis" class="external-link">New York Times</a> and the <a href="https://open-platform.theguardian.com/" class="external-link">Guardian</a> have APIs
+that allow developers of other websites or apps to programmatically
+integrate content from their papers on their sites/apps, for
+example.</li>
+<li>Government agencies often provide API access to their data: <a href="https://dataeuropa.gitlab.io/data-provider-manual/api-documentation/#dataeuropaeu-apis" class="external-link">data.europa.eu</a>,
+for example, provides a central portal for programmatic access to open
+data from the EU, national, regional, local and geospatial data
+sources.</li>
+<li>Web and social media companies often offer APIs so that other
+websites and apps can easily republish or integrate their content: see,
+for example, the <a href="https://developers.tiktok.com/" class="external-link">TikTok</a>, <a href="https://developers.google.com/maps/apis-by-platform" class="external-link">Google
+Maps</a>, <a href="https://api.slack.com/" class="external-link">Slack</a>, and <a href="https://developers.facebook.com/docs/" class="external-link">Facebook/Meta
+APIs</a>.</li>
+</ul>
+<p>One reason publishers create APIs is to allow them to clearly define
+limits on how their content can be re-used. The New York Times API, for
+example, does not allow access to the full-text from their articles via
+the API, and only accepts 500 requests per day and 5 requests per minute
+(via <a href="https://developer.nytimes.com/faq" class="external-link">the FAQ</a>).</p>
+<div class="section level3">
+<h3 id="api-calls">API calls<a class="anchor" aria-label="anchor" href="#api-calls"></a>
+</h3>
+<p>A “call” to an API is the action of programmatically requesting data
+from an external server, following the API’s defined protocols. That
+sounds very complex, but in fact many API calls use URLs to query
+databases, which you can view in your web browser.</p>
+<p>The OpenAlex API provides an “institution” search, for example, that
+consists of a URL that begins with
+<code>https://api.openalex.org/institutions?search=</code> and is
+followed by keywords from the name of a university or college. To make
+an API call for the University of Tokyo, for example, you could direct
+your browser to: <a href="https://api.openalex.org/institutions?search=university+of+tokyo" class="external-link">https://api.openalex.org/institutions?search=university+of+tokyo</a>.
+The API results show a structured response that the web browser doesn’t
+display in a user-friendly way, but we’ll explore different ways to
+parse, clean, analyze, and visualise that data throughout this
+lesson.</p>
+<p>Most web APIs that use URLs in this way are known as RESTful
+(Representational State Transfer) APIs. RESTful APIs rely on
+constructing URL strings to get the responses you want.</p>
+<ul>
+<li>
+<a href="https://glosario.carpentries.org/en/#url" class="external-link">URLs (Uniform
+Resource Locators)</a> are strings of characters that point to a data
+resource online. When we use a web browser, URLs usually point to markup
+language files such as HTML, which are rendered in your web browser so
+that they’re easy for you to interact with. When we use a URL to make an
+API call, however, the response is often in a format that a web browser
+doesn’t display for human consumption.</li>
+<li>
+<a href="https://glosario.carpentries.org/en/#http_request" class="external-link">HTTP
+(Hypertext Transfer Protocol) requests</a> provide for different methods
+(GET, HEAD, POST, etc.) to interact with online data. We’ll exclusively
+be making HTTP GET requests to “get” data from the RESTful OpenAlex API.
+Other HTTP methods, such as DELETE, can be used by developers who have
+the permissions to modify the database itself via HTTP requests.</li>
+</ul>
+</div>
+</section><section><h2 class="section-heading" id="openalex-api">OpenAlex API<a class="anchor" aria-label="anchor" href="#openalex-api"></a>
 </h2>
 <hr class="half-width">
-<div class="section level3">
-<h3 id="openalex-api">OpenAlex API<a class="anchor" aria-label="anchor" href="#openalex-api"></a>
-</h3>
+<p><a href="https://docs.openalex.org/" class="external-link">The OpenAlex technical
+documentation site</a> provides an <a href="https://docs.openalex.org/how-to-use-the-api/api-overview" class="external-link">overview
+of the API</a>, including example HTTP Request URLs you can use for
+making calls to the API. API documentation is an essential tool to help
+you learn to query the API. API documentation also often spells out for
+you different requirements for using the API (such as creating a free or
+paid account) and technical limitations about how often and how much
+data you can access.</p>
+<div id="openalex-documentation" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="openalex-documentation" class="callout-inner">
+<h3 class="callout-title">OpenAlex Documentation</h3>
+<div class="callout-content">
+<p>Use the <a href="https://docs.openalex.org/" class="external-link">OpenAlex API
+documentation</a> to find out:</p>
+<ul>
+<li>Do you need an account to use the API?</li>
+<li>Is it free to use the API?</li>
+<li>How many API calls can you make per day and per second?</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>The <a href="https://docs.openalex.org/how-to-use-the-api/rate-limits-and-authentication" class="external-link">Rate
+limits and authentication page</a> notes:</p>
+<ul>
+<li>The OpenAlex API is free and requires no authentication or account
+to use. You can add your email address to your API calls to get in the
+“polite pool”, however, which gives you access to faster API response
+times.</li>
+<li>For free accounts, the rate limits are: 100,000 calls each day and
+10 requests per second.</li>
+<li>It’s also possible to subscribe to a Premium plan and raise the API
+limits. And the docs note: “if you’re an academic researcher we can
+likely [raise your API limits] for free.”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -375,7 +553,78 @@ and more.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</section></section><section id="aio-openalex_api"><p>Content from <a href="openalex_api.html">The OpenAlex API</a></p>
+<hr>
+<p>Last updated on 2024-11-21 |
+
+        <a href="https://github.com/chennesy/lc-python-apis/edit/main/episodes/openalex_api.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 47 minutes</p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>
+</li></ul>
 </div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>
+</li></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="api-calls-for-scholarly-works">API calls for scholarly works<a class="anchor" aria-label="anchor" href="#api-calls-for-scholarly-works"></a>
+</h2>
+<hr class="half-width">
+<p>The OpenAlex API is structured around a series of <a href="https://docs.openalex.org/api-entities/entities-overview" class="external-link">entities</a>:
+Works, Authors, Sources, Institutions, Topics, Publishers, Funders, and
+Geo. Each entity allows you to construct queries using the entity as a
+search field, and to explore the entity “object,” which contains data
+related to each entity type.</p>
+<ul>
+<li>
+<a href="https://docs.openalex.org/api-entities/works" class="external-link">The Works
+entity</a>, for example, represents scholarly documents like journal
+articles, books, datasets, and theses that are indexed in OpenAlex. You
+can create queries to <a href="https://docs.openalex.org/api-entities/works/get-a-single-work" class="external-link">access
+a single work</a> or <a href="https://docs.openalex.org/api-entities/works/get-lists-of-works" class="external-link">lists
+of works</a>. The results of those queries will pull down <a href="https://docs.openalex.org/api-entities/works/work-object" class="external-link">Work
+objects</a> that contain structured data related to the scholarly
+work.</li>
+<li>
+<a href="https://docs.openalex.org/api-entities/institutions" class="external-link">The
+Institutions entity</a> represents Universities and other organisations
+to which authors claim affiliations. This provides a way to query the
+API by institution and retrieve data about the organisation.</li>
+</ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul><li>
+</li></ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
 </section></section>
 </div>
     </main>
@@ -424,8 +673,8 @@ any links that you are not going to use.
   "url": "https://chennesy.github.io/lc-python-apis/instructor/aio.html",
   "identifier": "https://chennesy.github.io/lc-python-apis/instructor/aio.html",
   "dateCreated": "2024-10-17",
-  "dateModified": "2024-11-19",
-  "datePublished": "2024-11-19"
+  "dateModified": "2024-11-21",
+  "datePublished": "2024-11-21"
 }
 
   </script><script>
