@@ -225,7 +225,8 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#api-calls-for-scholarly-works">API calls for scholarly works</a></li>
+        <ul><li><a href="#api-call-for-a-scholarly-work">API call for a scholarly work</a></li>
+<li><a href="#api-call-for-an-institution">API call for an institution</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -290,7 +291,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The OpenAlex API</h1>
-        <p>Last updated on 2024-11-21 |
+        <p>Last updated on 2024-11-22 |
 
         <a href="https://github.com/chennesy/lc-python-apis/edit/main/episodes/openalex_api.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -317,33 +318,222 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>
-</li></ul></div>
+<ul><li>Import and utilize the requests library to send a GET request to
+OpenAlex.</li>
+<li>Make an API call for a single work in OpenAlex.</li>
+<li>Navigate the requests response object.</li>
+<li>Use JSON to format and examine data returned from the OpenAlex
+API.</li>
+<li>Use Python dictionary keys and values to pinpoint specific
+metadata.</li>
+<li>Use nested key access to navigate nested dictionary data
+structures.</li>
+</ul></div>
 </div>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="api-calls-for-scholarly-works">API calls for scholarly works<a class="anchor" aria-label="anchor" href="#api-calls-for-scholarly-works"></a></h2>
-<hr class="half-width"><p>The OpenAlex API is structured around a series of <a href="https://docs.openalex.org/api-entities/entities-overview" class="external-link">entities</a>:
-Works, Authors, Sources, Institutions, Topics, Publishers, Funders, and
-Geo. Each entity allows you to construct queries using the entity as a
-search field, and to explore the entity “object,” which contains data
-related to each entity type.</p>
-<ul><li>
-<a href="https://docs.openalex.org/api-entities/works" class="external-link">The Works
-entity</a>, for example, represents scholarly documents like journal
-articles, books, datasets, and theses that are indexed in OpenAlex. You
-can create queries to <a href="https://docs.openalex.org/api-entities/works/get-a-single-work" class="external-link">access
-a single work</a> or <a href="https://docs.openalex.org/api-entities/works/get-lists-of-works" class="external-link">lists
-of works</a>. The results of those queries will pull down <a href="https://docs.openalex.org/api-entities/works/work-object" class="external-link">Work
-objects</a> that contain structured data related to the scholarly
-work.</li>
-<li>
+<section><h2 class="section-heading" id="api-call-for-a-scholarly-work">API call for a scholarly work<a class="anchor" aria-label="anchor" href="#api-call-for-a-scholarly-work"></a></h2>
+<hr class="half-width"><p>Let’s create an API call to obtain metadata related to a single
+scholarly work in OpenAlex. To send the GET request to OpenAlex with
+Python, we can import the <code>requests</code> library.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> requests</span></code></pre>
+</div>
+<p>Next, let’s structure a URL to send a GET request about a scholarly
+work to OpenAlex.</p>
+<p>OpenAlex provides a series of <a href="https://docs.openalex.org/api-entities/entities-overview" class="external-link">entities</a>
+that we can use to asks for different kinds of data. In this case, we
+can use <a href="https://docs.openalex.org/api-entities/works" class="external-link">the Works
+entity</a> to request data about things like journal articles, books,
+datasets, and theses that are indexed by OpenAlex. To access data from a
+single work, we can append any DOI (e.g.,
+<code>https://doi.org/10.18352/lq.10176</code>) to the base URL for
+Works (<code>https://api.openalex.org/works/</code>).</p>
+<p>Once we have the URL and DOI ready, we can send it as a parameter of
+our GET request using the <code>requests.get()</code> function.</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">'https://api.openalex.org/works/'</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>doi <span class="op">=</span> <span class="st">'https://doi.org/10.18352/lq.10176'</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># concatenate the URL and DOI strings using the + operator</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>response <span class="op">=</span> requests.get(base_url <span class="op">+</span> doi)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>response</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>&lt;Response [200]&gt;</code></pre>
+</div>
+<p>The response object will output the HTTP response status code: in our
+case, <code>Response [200]</code> means the request succeeded.</p>
+<p>We can explore the response in greater depth by calling the
+<code>.text()</code> method, which shows the content of the response as
+a string.</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>response.text()</span></code></pre>
+</div>
+<p>The output of <code>response.text()</code> is a very long unformatted
+string that is pretty difficult to read! Fortunately,
+<code>requests</code> includes a <code>.json()</code> method that is
+better for working with data that follows the key and value structure
+that we see here.</p>
+<p>JSON refers to <a href="https://glosario.carpentries.org/en/#json" class="external-link">JavaScript Object
+Notation</a>, and is a common structure for API responses to follow. In
+our case, the <code>.json()</code> method will format the response as a
+Python dictionary.</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>response.json()</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>{'id': 'https://openalex.org/W2560151723',
+ 'doi': 'https://doi.org/10.18352/lq.10176',
+ 'title': 'Library Carpentry: Software Skills Training for Library Professionals',
+ 'display_name': 'Library Carpentry: Software Skills Training for Library Professionals',
+ 'publication_year': 2016,
+ 'publication_date': '2016-11-01',
+ 'ids': {'openalex': 'https://openalex.org/W2560151723',
+  'doi': 'https://doi.org/10.18352/lq.10176',
+  'mag': '2560151723'},
+ 'language': 'en',
+ 'primary_location': {'is_oa': True,
+  'landing_page_url': 'https://doi.org/10.18352/lq.10176',
+  'pdf_url': 'http://www.liberquarterly.eu/articles/10.18352/lq.10176/galley/10667/download/',
+  'source': {'id': 'https://openalex.org/S2736366396',
+   'display_name': 'LIBER Quarterly The Journal of the Association of European Research Libraries',
+   'issn_l': '2213-056X',
+   'issn': ['2213-056X', '1435-5205'],
+   'is_oa': True,
+   'is_in_doaj': True,
+   'is_core': True,
+ ...</code></pre>
+</div>
+<div class="section level3">
+<h3 id="python-dictionaries">Python dictionaries<a class="anchor" aria-label="anchor" href="#python-dictionaries"></a></h3>
+<p>This output shows metadata fields stored as ‘keys’ and the data as
+‘values’, in the structure of a Python dictionary. Python dictionaries
+are key/value pairs that are wrapped in curly brackets–<code>{}</code>–
+with the key and value delineated by a colon, and each key/value pair
+separated by a comma. The first two key/value pairs in the dictionary
+above, for example, are:</p>
+<pre><code>{'id': 'https://openalex.org/W2560151723',
+'doi': 'https://doi.org/10.18352/lq.10176',</code></pre>
+<p>The string <code>id</code> is the first key, and the string
+<code>https://openalex.org/W2560151723</code> is its corresponding
+value. While these keys and values are both strings, Python dictionaries
+can contain other data types as keys and values as well.
+<code>2016</code> in the key/value pair
+<code>'publication_year': 2016,</code> for example, is an integer.</p>
+<p>While we have a hint that we’re dealing with a dictionary, since the
+output of <code>response.json()</code> begins with a curly bracket, we
+can check by calling the <code>type()</code> function. First let’s save
+the JSON response to a new variable:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>json_response <span class="op">=</span> response.json()</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="bu">type</span>(json_response)</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code><span><span class="va">dict</span></span></code></pre>
+</div>
+<p>To look at the list of all of the keys in the dictionary, we can
+call:</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>json_response.keys()</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>dict_keys(['id', 'doi', 'title', 'display_name', 'publication_year', 'publication_date', 'ids', 'language', 'primary_location', 'type', 'type_crossref', 'indexed_in', 'open_access', 'authorships', 'institution_assertions', 'countries_distinct_count', 'institutions_distinct_count', 'corresponding_author_ids', 'corresponding_institution_ids', 'apc_list', 'apc_paid', 'fwci', 'has_fulltext', 'fulltext_origin', 'cited_by_count', 'citation_normalized_percentile', 'cited_by_percentile_year', 'biblio', 'is_retracted', 'is_paratext', 'primary_topic', 'topics', 'keywords', 'concepts', 'mesh', 'locations_count', 'locations', 'best_oa_location', 'sustainable_development_goals', 'grants', 'datasets', 'versions', 'referenced_works_count', 'referenced_works', 'related_works', 'abstract_inverted_index', 'cited_by_api_url', 'counts_by_year', 'updated_date', 'created_date'])</code></pre>
+</div>
+<p>To look at a value associated with a specific key, we can add the key
+in square brackets (in the same way we refer to a column from a Pandas
+DataFrame).</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>json_response[<span class="st">'title'</span>]</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code><span><span class="st">'Library Carpentry: Software Skills Training for Library Professionals'</span></span></code></pre>
+</div>
+<p>The values of some keys in our <code>json_response</code> are
+actually another Python dictionary! We refer to these as nested
+dictionaries.</p>
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>json_response[<span class="st">'primary_location'</span>]</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>{'is_oa': True,
+ 'landing_page_url': 'https://doi.org/10.18352/lq.10176',
+ 'pdf_url': 'http://www.liberquarterly.eu/articles/10.18352/lq.10176/galley/10667/download/',
+ 'source': {'id': 'https://openalex.org/S2736366396',
+  'display_name': 'LIBER Quarterly The Journal of the Association of European Research Libraries',
+  'issn_l': '2213-056X',
+  'issn': ['2213-056X', '1435-5205'],
+  'is_oa': True,
+  'is_in_doaj': True,
+  'is_core': True,
+  'host_organization': 'https://openalex.org/P4310318591',
+  'host_organization_name': 'Utrecht University Library Open Access Journals (Publishing Services)',
+  'host_organization_lineage': ['https://openalex.org/P4310318591'],
+  'host_organization_lineage_names': ['Utrecht University Library Open Access Journals (Publishing Services)'],
+  'type': 'journal'},
+ 'license': 'cc-by',
+ 'license_id': 'https://openalex.org/licenses/cc-by',
+ 'version': 'publishedVersion',
+ 'is_accepted': True,
+ 'is_published': True}</code></pre>
+</div>
+<p>To drill down and take a closer look at these nested dictionary
+values, we can keep adding keys using the same square bracket notation.
+The title of this publication, ‘LIBER Quarterly The Journal of the
+Association of European Research Libraries’, for example, is nested
+under two more keys: <code>source</code> and <code>display_name</code>.
+To look at that value we can call:</p>
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>json_response[<span class="st">'primary_location'</span>][<span class="st">'source'</span>][<span class="st">'display_name'</span>]</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code><span><span class="st">'LIBER Quarterly The Journal of the Association of European Research Libraries'</span></span></code></pre>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="api-call-for-an-institution">API call for an institution<a class="anchor" aria-label="anchor" href="#api-call-for-an-institution"></a></h2>
+<hr class="half-width"><ul><li>
 <a href="https://docs.openalex.org/api-entities/institutions" class="external-link">The
 Institutions entity</a> represents Universities and other organisations
 to which authors claim affiliations. This provides a way to query the
 API by institution and retrieve data about the organisation.</li>
-</ul><div id="keypoints1" class="callout keypoints">
+</ul><p>Works, Authors, Sources, Institutions, Topics, Publishers, Funders,
+and Geo. Each entity allows you to construct queries using the entity as
+a search field, and to explore the entity “object,” which contains data
+related to each entity type.</p>
+<div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -416,8 +606,8 @@ any links that you are not going to use.
   "url": "https://chennesy.github.io/lc-python-apis/openalex_api.html",
   "identifier": "https://chennesy.github.io/lc-python-apis/openalex_api.html",
   "dateCreated": "2024-10-17",
-  "dateModified": "2024-11-21",
-  "datePublished": "2024-11-21"
+  "dateModified": "2024-11-22",
+  "datePublished": "2024-11-22"
 }
 
   </script><script>
